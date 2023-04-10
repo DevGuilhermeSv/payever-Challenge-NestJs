@@ -23,4 +23,7 @@ export default class Repository<T> implements IRepository<T> {
   update(id: any, item: T) {
     return this._repository.findByIdAndUpdate(id, item);
   }
+  delete(id: any) {
+    return this._repository.deleteOne({ id: id }).exec();
+  }
 }
