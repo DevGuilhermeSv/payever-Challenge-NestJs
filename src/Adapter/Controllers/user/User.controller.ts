@@ -33,10 +33,11 @@ export class UserController {
 
   @Post()
   async createBook(@Body() user: User): Promise<User> {
-    return await this.userService.create(user);
+    const dbReturn = await this.userService.create(user);
     const createTokenResponse = await firstValueFrom(
-      this.tokenClient.send('token_create', JSON.stringify(user)),
+      this.tokenClient.emit('client_create', JSON.stringify(dbReturn)),
     );
+    return dbReturn;
   }
 
   @Put()
