@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import axios from 'axios';
-import { UserService } from 'src/Application/services/user/user.service';
-import { UserHashService } from 'src/Application/services/userHash/userHash.service';
-import { User } from 'src/Infrastructure/Schema/UserSchema';
+import { UserService } from '../../../Application/services/user/user.service';
+import { UserHashService } from '../../../Application/services/userHash/userHash.service';
+import { User } from '../../../Infrastructure/Schema/UserSchema';
 
 @Controller('api/user')
 export class UserController {

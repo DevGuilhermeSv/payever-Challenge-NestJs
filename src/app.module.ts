@@ -7,7 +7,7 @@ import { User, UserSchema } from './Infrastructure/Schema/UserSchema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { HttpModule } from '@nestjs/axios';
 import { UserHash, UserHashSchema } from './Infrastructure/Schema/UserHash';
-import { UserHashRepository } from './Infrastructure/Repository/UserSchemaRepository';
+import { UserHashRepository } from './Infrastructure/Repository/UserHashRepository';
 import { UserHashService } from './Application/services/userHash/userHash.service';
 @Module({
   imports: [
