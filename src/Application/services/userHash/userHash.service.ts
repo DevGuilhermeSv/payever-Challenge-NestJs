@@ -19,4 +19,5 @@ export class UserHashService {
   async delete(id: string){
     return await this.userHashRepository.delete(id);
   }
+  
 }

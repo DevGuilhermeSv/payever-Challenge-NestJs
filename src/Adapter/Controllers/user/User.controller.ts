@@ -1,4 +1,3 @@
-import { HttpService } from '@nestjs/axios';
 import {
   Body,
   Controller,
@@ -22,8 +21,7 @@ export class UserController {
 
   constructor(
     userService: UserService,
-    private readonly httpService: HttpService,
-    private readonly _userHash: UserHashService,
+    _userHash: UserHashService,
     @Inject('USER_CLIENT') private readonly tokenClient: ClientProxy,
   ) {
     this.userHash = _userHash;
@@ -33,17 +31,14 @@ export class UserController {
   async getAllUser() {
     return await this.userService.getAll();
   }
-  @Get('/UserHash')
-  async getUserHash() {
-    return this.userHash.getAll();
-  }
+
   @Get(':id/avatar')
   async getAvatar(@Param('id') userId: string) {
-    const user = await this.getUserHttp(userId);
     const userHash = await this.userHash.getUser(userId);
     if (userHash !== null) {
       return userHash.avatarHash;
     } else {
+      const user = await this.userService.getUserHttp(userId);
       const img = await this.getBase64(user.avatar);
 
       this.userHash.create({
@@ -56,7 +51,7 @@ export class UserController {
 
   @Get(':id')
   async getUser(@Param('id') userId: string): Promise<User> {
-    return await this.getUserHttp(userId);
+    return await this.userService.getUserHttp(userId);
   }
 
   @Post()
@@ -82,19 +77,5 @@ export class UserController {
       .then((response) =>
         Buffer.from(response.data, 'binary').toString('base64'),
       );
-  }
-  private async getUserHttp(userId: string): Promise<User> {
-    return new Promise((resolve) => {
-      this.httpService
-        .get(`https://reqres.in/api/users/${userId}`, {
-          headers: {
-            Accept: 'application/json',
-          },
-        })
-        .subscribe((data: any) => {
-          console.log(data);
-          resolve(data.data.data);
-        });
-    });
   }
 }
