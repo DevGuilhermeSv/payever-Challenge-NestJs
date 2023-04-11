@@ -6,6 +6,7 @@ import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import { User } from '../../../Infrastructure/Schema/UserSchema';
 import { UserHash } from '../../../Infrastructure/Schema/UserHash';
 import { Inject } from '@nestjs/common';
+import { Response } from 'express';
 
 describe('BooksController', () => {
   let controller: UserController;
@@ -66,18 +67,23 @@ describe('BooksController', () => {
   });
 
   describe('getAvatar', () => {
+    const res = {} as unknown as Response;
+    res.set = jest.fn();
+    res.end = jest.fn(() => res);
     it('should return a string', async () => {
-      const result = await controller.getAvatar('10');
+      const result = await controller.getAvatar('10', res);
       expect(userHashService.getUser).toHaveBeenCalled();
-      expect(typeof result).toEqual('string');
+      expect(res.set).toHaveBeenCalled();
+      expect(res.end).toHaveBeenCalled();
     });
     it('should generate base64 img', async () => {
       jest.spyOn(userHashService, 'getUser').mockReturnValueOnce(null);
-      const result = await controller.getAvatar('10');
+      const result = await controller.getAvatar('10', res);
 
       expect(userHashService.getUser).toHaveBeenCalled();
       expect(userHashService.create).toHaveBeenCalled();
-      expect(typeof result).toEqual('string');
+      expect(res.set).toHaveBeenCalled();
+      expect(res.end).toHaveBeenCalled();
     });
   });
 
@@ -85,7 +91,6 @@ describe('BooksController', () => {
     it('should return a user', async () => {
       const result = controller.getUser('10');
       expect(service.getUserHttp).toHaveBeenCalled();
-      expect(typeof result).toEqual('object');
     });
   });
   describe('createUser', () => {

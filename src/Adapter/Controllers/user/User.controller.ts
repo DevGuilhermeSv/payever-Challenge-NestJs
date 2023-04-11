@@ -7,12 +7,18 @@ import {
   Param,
   Post,
   Put,
+  Res,
+  StreamableFile,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import axios from 'axios';
 import { UserService } from '../../../Application/services/user/user.service';
 import { UserHashService } from '../../../Application/services/userHash/userHash.service';
 import { User } from '../../../Infrastructure/Schema/UserSchema';
+import { Response } from 'express';
+import fs, { createReadStream } from 'fs';
+import { buffer } from 'stream/consumers';
+import { join } from 'path';
 
 @Controller('api/user')
 export class UserController {
@@ -33,19 +39,26 @@ export class UserController {
   }
 
   @Get(':id/avatar')
-  async getAvatar(@Param('id') userId: string) {
-    const userHash = await this.userHash.getUser(userId);
-    if (userHash !== null) {
-      return userHash.avatarHash;
-    } else {
-      const user = await this.userService.getUserHttp(userId);
-      const img = await this.getBase64(user.avatar);
+  async getAvatar(@Param('id') userId: string, @Res() res: Response) {
+    try {
+      const userHash = await this.userHash.getUser(userId);
+      let img;
+      if (userHash !== null) {
+        img = userHash.avatarHash;
+      } else {
+        const user = await this.userService.getUserHttp(userId);
+        img = await this.getBase64(user.avatar);
 
-      this.userHash.create({
-        id: userId,
-        avatarHash: img,
-      });
-      return img;
+        this.userHash.create({
+          id: userId,
+          avatarHash: img,
+        });
+      }
+      const buff = Buffer.from(img, 'base64');
+      res.set({ 'Content-Type': 'image/png' });
+      res.end(buff);
+    } catch (error) {
+      res.sendStatus(400);
     }
   }
 
