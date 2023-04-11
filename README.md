@@ -31,6 +31,15 @@
 ```bash
 $ npm install
 ```
+## Running MongoDb and RabbitMQ
+
+```bash
+# Using docker-compose
+$ docker compose up
+
+```
+
+this command will up the rabbitMQ and MongoDb containers and expose them to local connections
 
 ## Running the app
 
