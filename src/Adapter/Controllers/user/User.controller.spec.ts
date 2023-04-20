@@ -3,8 +3,8 @@ import { UserController } from './User.controller';
 import { UserService } from '../../../Application/services/user/user.service';
 import { UserHashService } from '../../../Application/services/userHash/userHash.service';
 import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
-import { User } from '../../../Infrastructure/Schema/UserSchema';
-import { UserHash } from '../../../Infrastructure/Schema/UserHash';
+import { User } from '../../../Infrastructure/Schema/User.schema';
+import { UserHash } from '../../../Infrastructure/Schema/UserHash.schema';
 import { Inject } from '@nestjs/common';
 import { Response } from 'express';
 

@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { UserRepository } from '../../../Infrastructure/Repository/UserRepository';
 import { HttpModule, HttpService } from '@nestjs/axios';
-import { User } from '../../../Infrastructure/Schema/UserSchema';
+import { User } from '../../../Infrastructure/Schema/User.schema';
 
 describe('UserService', () => {
   let service: UserService;

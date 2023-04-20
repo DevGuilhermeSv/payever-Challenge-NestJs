@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserHashRepository } from '../../../Infrastructure/Repository/UserHashRepository';
-import { UserHash } from 'src/Infrastructure/Schema/UserHash';
+import { UserHash } from 'src/Infrastructure/Schema/UserHash.schema';
 
 @Injectable()
 export class UserHashService {

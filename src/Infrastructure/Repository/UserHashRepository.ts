@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import Repository from './Repository';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from '../Schema/UserSchema';
-import { UserHash } from '../Schema/UserHash';
+import { UserHash } from '../Schema/UserHash.schema';
 
 @Injectable()
 export class UserHashRepository extends Repository<UserHash> {
