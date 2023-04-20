@@ -3,12 +3,10 @@ import {
   Controller,
   Delete,
   Get,
-  Inject,
   Param,
   Post,
   Res,
 } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
 import { UserService } from '../../../Application/services/user/user.service';
 import { UserHashService } from '../../../Application/services/userHash/userHash.service';
 import { User } from '../../../Infrastructure/Schema/User.schema';
@@ -20,11 +18,7 @@ export class UserController {
   private readonly userService: UserService;
   private readonly userHash: UserHashService;
 
-  constructor(
-    userService: UserService,
-    _userHash: UserHashService,
-    @Inject('USER_CLIENT') private readonly tokenClient: ClientProxy,
-  ) {
+  constructor(userService: UserService, _userHash: UserHashService) {
     this.userHash = _userHash;
     this.userService = userService;
   }
@@ -53,8 +47,6 @@ export class UserController {
   @Post('/users')
   async createUser(@Body() user: UserDto): Promise<User> {
     const result = await this.userService.create(user);
-
-    this.tokenClient.emit('client_create', JSON.stringify(result));
     return result;
   }
 

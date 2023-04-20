@@ -12,6 +12,7 @@ import {
   UserHashSchema,
 } from '../Infrastructure/Schema/UserHash.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { EmailService } from './services/email/email.service';
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -22,6 +23,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     HttpModule,
   ],
   controllers: [UserController],
-  providers: [UserService, UserRepository, UserHashService, UserHashRepository],
+  providers: [
+    UserService,
+    UserRepository,
+    UserHashService,
+    UserHashRepository,
+    EmailService,
+  ],
 })
 export class UserModule {}

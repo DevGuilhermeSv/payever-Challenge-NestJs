@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../../../Infrastructure/Repository/UserRepository';
 import { User } from 'src/Infrastructure/Schema/User.schema';
 import { HttpService } from '@nestjs/axios';
@@ -6,12 +6,17 @@ import { UserHashRepository } from 'src/Infrastructure/Repository/UserHashReposi
 import axios from 'axios';
 import { writeFile } from 'fs';
 import { UserDto } from 'src/Application/Dto/User.dto';
+import { EmailOptions } from '../email/emailOptions';
+import { EmailService } from '../email/email.service';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly userHashrepository: UserHashRepository,
+    private readonly emailService: EmailService,
+    @Inject('USER_CLIENT') private readonly tokenClient: ClientProxy,
     private httpService: HttpService,
   ) {}
   async getAll() {
@@ -25,7 +30,23 @@ export class UserService {
     return await this.userRepository.update(id, data);
   }
   async create(data: UserDto): Promise<User> {
-    return await this.userRepository.create(data);
+    try {
+      const result = await this.userRepository.create(data);
+      //send RabbitMq Event
+      this.tokenClient.emit('client_create', JSON.stringify(result));
+      const emailOption = new EmailOptions();
+      emailOption.to = result.email;
+      emailOption.text = 'User create with sucess';
+
+      //send Email event
+      this.emailService.sendEmail(emailOption);
+      return result;
+    } catch (error) {
+      throw new BadRequestException({
+        error: 'not was possible create a new user',
+        description: error,
+      });
+    }
   }
   async getUserHttp(userId: string): Promise<User> {
     return new Promise((resolve) => {
