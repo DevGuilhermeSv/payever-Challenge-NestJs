@@ -61,16 +61,8 @@ export class UserController {
 
   @Delete('/:id/avatar')
   deleteUserHash(@Param('id') userId: string) {
-    this.deleteImage(userId);
     return this.userHash.delete(userId);
   }
 
-  private async deleteImage(userId: string) {
-    new Promise((resolve) => {
-      unlink(`img-${userId}-Avatar.png`, () => {
-        console.log('Removed');
-        resolve(true);
-      });
-    });
-  }
+  
 }
