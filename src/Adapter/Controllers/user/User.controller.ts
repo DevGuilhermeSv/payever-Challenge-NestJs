@@ -11,7 +11,7 @@ import { UserService } from '../../../Application/services/user/user.service';
 import { UserHashService } from '../../../Application/services/userHash/userHash.service';
 import { User } from '../../../Infrastructure/Schema/User.schema';
 import { Response } from 'express';
-import { UserDto } from 'src/Application/Dto/User.dto';
+import { UserDto } from '../../../Application/Dto/User.dto';
 
 @Controller('api')
 export class UserController {
