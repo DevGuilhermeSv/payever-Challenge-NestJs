@@ -32,14 +32,16 @@ export class UserService {
   async create(data: UserDto): Promise<User> {
     try {
       const result = await this.userRepository.create(data);
+
       //send RabbitMq Event
-      this.tokenClient.emit('client_create', JSON.stringify(result));
+      this.sendRabbitMqEvent(result);
+
+      //send Email event
       const emailOption = new EmailOptions();
       emailOption.to = result.email;
       emailOption.text = 'User create with sucess';
-
-      //send Email event
       this.emailService.sendEmail(emailOption);
+
       return result;
     } catch (error) {
       throw new BadRequestException({
@@ -47,6 +49,9 @@ export class UserService {
         description: error,
       });
     }
+  }
+  sendRabbitMqEvent(data: User) {
+    this.tokenClient.emit('client_create', JSON.stringify(data));
   }
   async getUserHttp(userId: string): Promise<User> {
     return new Promise((resolve) => {
