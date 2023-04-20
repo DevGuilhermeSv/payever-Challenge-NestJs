@@ -41,21 +41,21 @@ describe('UserService', () => {
       expect(result.id).toEqual(10);
     });
     it('getAll', async () => {
-      const result = await service.getAll();
+      await service.getAll();
       expect(userRepository.getAll).toHaveBeenCalled();
     });
     it('getUser', async () => {
-      const result = await service.getUser('10');
+      await service.getUser('10');
       expect(userRepository.getUser).toHaveBeenCalled();
     });
     it('update', async () => {
       const user = new User();
-      const result = await service.update('10', user);
+      await service.update('10', user);
       expect(userRepository.update).toHaveBeenCalled();
     });
     it('create', async () => {
       const user = new User();
-      const result = await service.create(user);
+      await service.create(user);
       expect(userRepository.create).toHaveBeenCalled();
     });
   });

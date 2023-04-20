@@ -21,7 +21,7 @@ export class UserService {
     return await this.userRepository.getUser(id);
   }
 
-  async update(id: any, data: User): Promise<User> {
+  async update(id: any, data: UserDto): Promise<User> {
     return await this.userRepository.update(id, data);
   }
   async create(data: UserDto): Promise<User> {
@@ -40,14 +40,15 @@ export class UserService {
         });
     });
   }
+
   /**
    * Get the User Avatar by userId property. The image is saved on file system before be returned.
-   * @param userId 
+   * @param userId
    * @returns A Buffer of the image in base64 format
    */
-  async getAvatar(userId: string):Promise<Buffer> {
+  async getAvatar(userId: string): Promise<Buffer> {
     try {
-      let img;
+      let img: string;
       let id;
       const userHash = await this.userHashrepository.getUser(userId);
       if (userHash !== null) {

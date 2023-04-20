@@ -3,7 +3,6 @@ import { Model } from 'mongoose';
 import IRepository from './IRepository';
 @Injectable()
 export default class Repository<T> implements IRepository<T> {
-  // eslint-disable-next-line prettier/prettier
   
   private _repository: Model<T>;
   private _populateOnFind: string[];
@@ -20,7 +19,7 @@ export default class Repository<T> implements IRepository<T> {
     return this._repository.create(item);
   }
 
-  update(id: any, item: T) {
+  update(id: any, item: T | any) {
     return this._repository.findByIdAndUpdate(id, item);
   }
   delete(id: any) {

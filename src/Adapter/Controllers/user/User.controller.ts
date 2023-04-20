@@ -13,7 +13,6 @@ import { UserService } from '../../../Application/services/user/user.service';
 import { UserHashService } from '../../../Application/services/userHash/userHash.service';
 import { User } from '../../../Infrastructure/Schema/User.schema';
 import { Response } from 'express';
-import { writeFile, unlink } from 'fs';
 import { UserDto } from 'src/Application/Dto/User.dto';
 
 @Controller('api/user')
@@ -63,6 +62,4 @@ export class UserController {
   deleteUserHash(@Param('id') userId: string) {
     return this.userHash.delete(userId);
   }
-
-  
 }

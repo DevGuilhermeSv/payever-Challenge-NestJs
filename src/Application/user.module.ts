@@ -7,16 +7,21 @@ import { UserHashRepository } from '../Infrastructure/Repository/UserHashReposit
 import { HttpModule } from '@nestjs/axios';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../Infrastructure/Schema/User.schema';
-import { UserHash, UserHashSchema } from '../Infrastructure/Schema/UserHash.schema';
+import {
+  UserHash,
+  UserHashSchema,
+} from '../Infrastructure/Schema/UserHash.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 @Module({
-  imports: [ MongooseModule.forFeature([
-    { name: User.name, schema: UserSchema },
-    { name: UserHash.name, schema: UserHashSchema },
-  ]),
-  ClientsModule.register([{ name: 'USER_CLIENT', transport: Transport.RMQ }]),
-  HttpModule],
+  imports: [
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: UserHash.name, schema: UserHashSchema },
+    ]),
+    ClientsModule.register([{ name: 'USER_CLIENT', transport: Transport.RMQ }]),
+    HttpModule,
+  ],
   controllers: [UserController],
-  providers: [UserService, UserRepository,UserHashService,UserHashRepository],
+  providers: [UserService, UserRepository, UserHashService, UserHashRepository],
 })
 export class UserModule {}
