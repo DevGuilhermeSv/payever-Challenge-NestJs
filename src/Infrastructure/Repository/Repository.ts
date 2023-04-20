@@ -3,7 +3,6 @@ import { Model } from 'mongoose';
 import IRepository from './IRepository';
 @Injectable()
 export default class Repository<T> implements IRepository<T> {
-  
   private _repository: Model<T>;
   private _populateOnFind: string[];
 

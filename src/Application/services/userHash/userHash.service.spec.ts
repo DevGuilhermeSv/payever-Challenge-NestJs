@@ -4,7 +4,6 @@ import { UserHashService } from './userHash.service';
 
 describe('UserService', () => {
   let service: UserHashService;
-  let userHashRepository: UserHashRepository;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [],
@@ -20,7 +19,7 @@ describe('UserService', () => {
     }).compile();
 
     service = module.get<UserHashService>(UserHashService);
-    userHashRepository = module.get<UserHashRepository>(UserHashRepository);
+    module.get<UserHashRepository>(UserHashRepository);
   });
 
   it('should be defined', () => {
