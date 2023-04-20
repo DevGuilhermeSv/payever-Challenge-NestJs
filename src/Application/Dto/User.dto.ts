@@ -1,4 +1,5 @@
 import {
+  IsEmail,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -7,29 +8,34 @@ import {
 } from 'class-validator';
 
 export class UserDto {
-  @IsNumber()
-  @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(10)
-  id: number;
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(100)
+
+  @IsEmail()
+  @IsNotEmpty({
+    message: 'The $property cant be null'
+  })
   email: string;
+
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: 'The $property cant be null'
+  })
   @MinLength(2)
-  @MaxLength(100)
+  @MaxLength(100, {
+    message: '$property is too long! Maximal length is $constraint'
+  })
   first_name: string;
+
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: 'The $property cant be null'
+  })
   @MinLength(2)
-  @MaxLength(100)
+  @MaxLength(100, {
+    message: '$property is too long! Maximal length is $constraint'
+  })
   last_name: string;
+
   @IsString()
-  @IsNotEmpty()
   @MinLength(2)
-  @MaxLength(100)
   avatar: string;
 }

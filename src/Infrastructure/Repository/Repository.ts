@@ -16,7 +16,7 @@ export default class Repository<T> implements IRepository<T> {
     return this._repository.find().populate(this._populateOnFind).exec();
   }
 
-  create(item: T): Promise<T> {
+  create(item: T | any): Promise<T> {
     return this._repository.create(item);
   }
 

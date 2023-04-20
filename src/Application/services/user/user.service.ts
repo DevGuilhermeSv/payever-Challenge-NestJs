@@ -5,6 +5,7 @@ import { HttpService } from '@nestjs/axios';
 import { UserHashRepository } from 'src/Infrastructure/Repository/UserHashRepository';
 import axios from 'axios';
 import { writeFile } from 'fs';
+import { UserDto } from 'src/Application/Dto/User.dto';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
   async update(id: any, data: User): Promise<User> {
     return await this.userRepository.update(id, data);
   }
-  async create(data: User): Promise<User> {
+  async create(data: UserDto): Promise<User> {
     return await this.userRepository.create(data);
   }
   async getUserHttp(userId: string): Promise<User> {

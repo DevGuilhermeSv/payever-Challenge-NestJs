@@ -9,12 +9,12 @@ import {
   Res,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import axios from 'axios';
 import { UserService } from '../../../Application/services/user/user.service';
 import { UserHashService } from '../../../Application/services/userHash/userHash.service';
 import { User } from '../../../Infrastructure/Schema/User.schema';
 import { Response } from 'express';
 import { writeFile, unlink } from 'fs';
+import { UserDto } from 'src/Application/Dto/User.dto';
 
 @Controller('api/user')
 export class UserController {
@@ -52,11 +52,11 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() user: User): Promise<User> {
-    const dbReturn = await this.userService.create(user);
+  async createUser(@Body() user: UserDto): Promise<User> {
+    const result = await this.userService.create(user);
 
-    this.tokenClient.emit('client_create', JSON.stringify(dbReturn));
-    return dbReturn;
+    this.tokenClient.emit('client_create', JSON.stringify(result));
+    return result;
   }
 
   @Delete('/:id/avatar')
