@@ -2,7 +2,7 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../../../Infrastructure/Repository/UserRepository';
 import { User } from 'src/Infrastructure/Schema/User.schema';
 import { HttpService } from '@nestjs/axios';
-import { UserHashRepository } from 'src/Infrastructure/Repository/UserHashRepository';
+import { UserHashRepository } from '../../../Infrastructure/Repository/UserHashRepository';
 import axios from 'axios';
 import { writeFile } from 'fs';
 import { UserDto } from 'src/Application/Dto/User.dto';
