@@ -15,7 +15,7 @@ import { User } from '../../../Infrastructure/Schema/User.schema';
 import { Response } from 'express';
 import { UserDto } from 'src/Application/Dto/User.dto';
 
-@Controller('api/user')
+@Controller('api')
 export class UserController {
   private readonly userService: UserService;
   private readonly userHash: UserHashService;
@@ -28,12 +28,12 @@ export class UserController {
     this.userHash = _userHash;
     this.userService = userService;
   }
-  @Get()
+  @Get('/user')
   async getAllUser() {
     return await this.userService.getAll();
   }
 
-  @Get(':id/avatar')
+  @Get('/user/:id/avatar')
   async getAvatar(@Param('id') userId: string, @Res() res: Response) {
     try {
       const result = this.userService.getAvatar(userId);
@@ -45,12 +45,12 @@ export class UserController {
     }
   }
 
-  @Get(':id')
+  @Get('/user/:id')
   async getUser(@Param('id') userId: string): Promise<User> {
     return await this.userService.getUserHttp(userId);
   }
 
-  @Post()
+  @Post('/users')
   async createUser(@Body() user: UserDto): Promise<User> {
     const result = await this.userService.create(user);
 
@@ -58,7 +58,7 @@ export class UserController {
     return result;
   }
 
-  @Delete('/:id/avatar')
+  @Delete('/user/:id/avatar')
   deleteUserHash(@Param('id') userId: string) {
     return this.userHash.delete(userId);
   }
