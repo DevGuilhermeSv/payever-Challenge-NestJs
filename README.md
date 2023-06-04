@@ -22,26 +22,46 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descrição / Description
+Como parte de um processo seletivo desenvolvi essa aplicação que se tratada uma API com demonstração de diversos conseitos e ferramentas de programação.
+Ela foi desenvolvida utilizando o Framework NestJs. 
+Caso deseje, fique a vontade para clonar o repositorio e utilizar os códigos como bem desejar.  
+As part of a selection process, I developed this application which is treated as an API with demonstration of several concepts and programming tools.
+It was developed using the NestJs Framework.
+If you wish, feel free to clone the repository and use the codes as you wish.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+### Oque consiste a aplicação  / What consist the aplication
+-  **Obter Usuario  / GET** - /api/user/{userId}  
+    - [X]  Recuperar dados da api Reqres [https://reqres.in](https://reqres.in/api/users/{userId})
+    - [X]  Retornar Usuario em JSON
+-  **Criar novo usuario.  / POST** - /api/users
+    - [X]  O novo usuario deve ser armazenado em banco de dados MongoDb  
+    - [X]  uma notificação deve ser enviada por email e RabittMQ
+-  **Obter Avatar. / GET** - /api/user/{userId}/avatar
+    - [X]    Salvar a imagem como arquivo 
+    - [X]    Armazenar no Bando de Dados com o ID do usuario e o Hash da imagem
+    - [X]    Retorna-la como representação Base64
+    - [X]    As seguintes requisições devem retornar o arquivo previamente salvo em Base64  
+-  **Deletar Avatar  / DELETE** - /api/user/{userId}/avatar
+    - [X]  Remover o arquivo do sistema de arquivo
+    - [X]  Remover entradas do banco de dados  
+    
+## Instalação / Installation
 
 ```bash
 $ npm install
 ```
-## Running MongoDb and RabbitMQ
+## Executando MongoDb e RabbitMQ / Running MongoDb and RabbitMQ
 
 ```bash
 # Using docker-compose
 $ docker compose up
 
 ```
+Este comando vai subir os container do RabbitMQ e MongoDb. Estes ficam expostos para conexção local nas portas padrões.  
+This command will up the rabbitMQ and MongoDb containers and expose them to local connections
 
-this command will up the rabbitMQ and MongoDb containers and expose them to local connections
-
-## Running the app
+## Executando a aplicação / Running the app
 
 ```bash
 # development
@@ -54,7 +74,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Teste / Test
 
 ```bash
 # unit tests
@@ -67,15 +87,15 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Suporte / Support  
+Qualquer ajuste e sugestão sera bem vindo! Abra uma Issue descrevendo o problema e uma branche a apartir da Main
+com a atualização.  
+Any adjuste will be wellcome! Open a Issue with the description of problem and a branch from Main whit the update suggestion.  
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Contatos / Stay in touch
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Guilherme Silva](https://github.com/DevGuilhermeSv)
+- Website - [https://meuportfolio.fly.dev/](https://meuportfolio.fly.dev/)
 
 ## License
 
