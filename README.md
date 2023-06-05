@@ -30,13 +30,13 @@ As part of a selection process, I developed this application which is treated as
 It was developed using the NestJs Framework.
 If you wish, feel free to clone the repository and use the codes as you wish.
 
-### Oque consiste a aplicação  / What consist the aplication
+### Oque consiste a aplicação  / What consist the application
 -  **Obter Usuario  / GET** - /api/user/{userId}  
     - [X]  Recuperar dados da api Reqres [https://reqres.in](https://reqres.in/api/users/{userId})
     - [X]  Retornar Usuario em JSON
 -  **Criar novo usuario.  / POST** - /api/users
     - [X]  O novo usuario deve ser armazenado em banco de dados MongoDb  
-    - [X]  uma notificação deve ser enviada por email e RabittMQ
+    - [X]  Uma notificação deve ser enviada por email e RabittMQ
 -  **Obter Avatar. / GET** - /api/user/{userId}/avatar
     - [X]    Salvar a imagem como arquivo 
     - [X]    Armazenar no Bando de Dados com o ID do usuario e o Hash da imagem
