@@ -23,10 +23,10 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Descrição / Description
-Como parte de um processo seletivo desenvolvi essa aplicação que se tratada uma API com demonstração de diversos conseitos e ferramentas de programação.
+Se tratada de uma API com demonstração de diversos conseitos e ferramentas de programação.
 Ela foi desenvolvida utilizando o Framework NestJs. 
 Caso deseje, fique a vontade para clonar o repositorio e utilizar os códigos como bem desejar.  
-As part of a selection process, I developed this application which is treated as an API with demonstration of several concepts and programming tools.
+Is an API with demonstration of several concepts and programming tools.
 It was developed using the NestJs Framework.
 If you wish, feel free to clone the repository and use the codes as you wish.
 
